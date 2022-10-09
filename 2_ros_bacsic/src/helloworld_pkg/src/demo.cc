@@ -1,3 +1,5 @@
+// 控制台打印hello worlds
+
 #include "ros/ros.h"
 
 int main(int argc, char *argv[]) {
