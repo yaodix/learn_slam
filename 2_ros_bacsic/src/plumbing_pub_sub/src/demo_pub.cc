@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
   ros::init(argc, argv, "pub");  // pub是节点名称
   // 2.创建节点句柄
   ros::NodeHandle nh;
-  // 3.创建发布者对象。fang是话题名称，可以通过rostopic echo fang来常看
+  // 3.创建发布者对象。模板类型是话题类型（std_msgs::String），fang是话题名称，可以通过rostopic echo fang来常看
   ros::Publisher pub = nh.advertise<std_msgs::String>("fang", 10);  
   // 4.编写发布消息，并发布消息
   std_msgs::String msg;
@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     pub.publish(msg);
     ROS_INFO(("publish data is " + msg.data).c_str());
     rate.sleep();
-    ros::spinOnce();  // 官方建议，虽然没有回调函数
+    ros::spinOnce();  // 官方建议，虽然没有回调函数, 循环中使用spinonce, 非循环中使用spin
   }
   
   return 0;

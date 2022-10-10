@@ -5,7 +5,8 @@
             "includePath": [
                 "/opt/ros/melodic/include/**",
                 "/usr/include/**",
-                "/home/yao/workspace/learn_slam/2_ros_bacsic/src/helloworld_pkg/include/**"
+                "/home/yao/workspace/learn_slam/2_ros_bacsic/src/helloworld_pkg/include/**",
+                "/home/yao/workspace/learn_slam/2_ros_bacsic/devel/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
