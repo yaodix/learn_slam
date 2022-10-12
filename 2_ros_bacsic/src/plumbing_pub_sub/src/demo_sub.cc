@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
   ros::Subscriber pub = nh.subscribe("fang", 10, dogMsg);  // 订阅话题名称需一致
   // 4.处理订阅数据
   ros::spin();  // 有回调函数使用，设置循环调用回调函数
+  ROS_INFO("after spin");  // 后续语句在过程中不会执行
   return 0;
 }
 
