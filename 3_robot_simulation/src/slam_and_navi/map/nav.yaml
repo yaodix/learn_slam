@@ -1,0 +1,12 @@
+image: /home/yao/workspace/learn_slam/3_robot_simulation/src/slam_and_navi/map/nav.pgm
+# 地图刻度尺 m/pixel
+resolution: 0.050000
+# 地图位姿（地图右下角相对于rivz中原点的位置）x y theta
+origin: [-50.000000, -50.000000, 0.000000]
+# 是否反转地图颜色
+negate: 0
+# 占用阈值
+occupied_thresh: 0.65
+# 空闲阈值
+free_thresh: 0.196
+
