@@ -1,0 +1,10 @@
+<launch>
+  <!-- 启动AMCL节点 -->
+  <include file="$(find slam_and_navi)/launch/amcl_run.launch" />
+
+  <!-- 运行move_base节点 -->
+  <include file="$(find slam_and_navi)/launch/move.launch" />
+  <!-- 运行rviz， 在本launch文件中开启rviz，关闭 amcl_run 或navi launch中的rviz节点-->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find slam_and_navi)/config/navi_run.rviz" />
+
+</launch>

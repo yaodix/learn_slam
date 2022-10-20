@@ -41,6 +41,6 @@
       <!-- <node pkg="rviz" type="rviz" name="rviz" /> -->
       <!-- 可以保存 rviz 配置并后期直接使用-->
       
-      <node pkg="rviz" type="rviz" name="rviz" args="-d $(find slam_and_navi)/config/gmapping_slam.rviz"/>
+      <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find slam_and_navi)/config/gmapping_slam.rviz"/> -->
   </launch>
   
