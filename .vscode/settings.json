@@ -1,5 +1,10 @@
 {
   "files.associations": {
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "cmath": "cpp",
+    "ostream": "cpp",
+    "core": "cpp",
+    "numericaldiff": "cpp",
+    "random": "cpp"
   }
 }

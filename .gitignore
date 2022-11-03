@@ -1,4 +1,10 @@
 build
 */devel
 */build
+*/bag
+
+*/*/*/devel
+*/*/*/build
 */.catkin_workspace
+*/*/bag
+

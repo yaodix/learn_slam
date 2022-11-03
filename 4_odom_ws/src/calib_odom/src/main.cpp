@@ -349,8 +349,8 @@ Eigen::Vector3d  cal_delta_distence(Eigen::Vector3d odom_pose)
 
     //TODO:
      Eigen::Matrix3d R;
-    R << cos(now_pos(2)), -sin(now_pos(2)), 0,
-         sin(now_pos(2)),  cos(now_pos(2)), 0,
+    R << cos(last_pos(2)), -sin(last_pos(2)), 0,
+         sin(last_pos(2)),  cos(last_pos(2)), 0,
          0              ,  0              , 1;
     //  解算
     d_pos = R.inverse() * (now_pos - last_pos);
