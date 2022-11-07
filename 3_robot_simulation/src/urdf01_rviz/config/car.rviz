@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /Odometry1
+        - /LaserScan1
         - /Camera1
       Splitter Ratio: 0.5
     Tree Height: 789
@@ -193,7 +194,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic: /scan
       Unreliable: false
@@ -247,7 +248,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.823412895202637
+      Distance: 37.30726623535156
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -262,10 +263,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6197978854179382
+      Pitch: 1.2897965908050537
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.6754032373428345
+      Yaw: 1.5754033327102661
     Saved: ~
 Window Geometry:
   Camera:
@@ -285,5 +286,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 2257
-  X: 626
-  Y: 120
+  X: 77
+  Y: 99

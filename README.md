@@ -34,4 +34,6 @@
 
 ![image](https://github.com/yaodix/learn_slam/blob/master/.file/2D%20nav%20goal.png)  
 
->>可以看到机器人开始建图
+>>机器人开始建图  
+
+![image](https://github.com/yaodix/learn_slam/blob/master/.file/slam_auto.gif)
