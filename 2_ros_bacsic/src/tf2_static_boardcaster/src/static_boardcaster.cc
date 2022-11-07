@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
   geometry_msgs::TransformStamped ts;
 
   ts.header.stamp = ros::Time::now();
-  ts.header.frame_id = "base_linker";
+  ts.header.frame_id = "base_link";
 
   ts.child_frame_id = "laser";
 
@@ -23,11 +23,11 @@ int main(int argc, char* argv[]) {
   ts.transform.translation.z = 0.5;
 
   tf2::Quaternion qtn;
-  qtn.setRPY(0, 0, 0);
-
+  qtn.setRPY(0., 0, 0.017*15);
+  // qtn.normalize();
   ts.transform.rotation.x = qtn.getX();
   ts.transform.rotation.y = qtn.getY();
-  ts.transform.rotation.z = qtn.getY();
+  ts.transform.rotation.z = qtn.getZ();
   ts.transform.rotation.w = qtn.getW();
 
   tf_caster.sendTransform(ts);
