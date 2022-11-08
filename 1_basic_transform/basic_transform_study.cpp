@@ -1,51 +1,47 @@
+// 理解里程计中不同位置机器人坐标变换
+
 #include <iostream>
 
 #include "eigen3/Eigen/Core"
 #include "eigen3/Eigen/Geometry"
 
 using namespace std;
+
+// 右手坐标系，四指方向(逆时针)为正旋转方向
 void test1() {
-    Eigen::Vector3d B_in_coor_O(3, 4, 0);  // 机器人B在坐标系O中的坐标：
+    Eigen::Vector3d B_in_coor_O(3, 4, M_PI/2);  // 机器人B在坐标系O中的坐标：
 
     // 坐标系B到坐标O的转换矩阵：
     Eigen::Matrix4d coor_B_to_coor_O;
-    double theta = M_PI ;
-    coor_B_to_coor_O << cos(theta), sin(theta), 0, B_in_coor_O(0),
-                        -sin(theta),  cos(theta), 0, B_in_coor_O(1),
-                                0,          0,        1,              0,
-                                0,          0,        0,              1;
+    // O->B旋转角度与B->O相反， 坐标系旋转参考https://blog.csdn.net/u012686154/article/details/88854386
+    double theta = -B_in_coor_O(2);  
+    coor_B_to_coor_O << cos(theta),   sin(theta),   0, B_in_coor_O(0),
+                        -sin(theta),  cos(theta),   0, B_in_coor_O(1),
+                                0,        0,        1,       0,
+                                0,        0,        0,       1;
 
     Eigen::Matrix4d coor_O_to_coor_B = Eigen::Matrix4d::Identity();  // 坐标系O到坐标B的转换矩阵:
     coor_O_to_coor_B.topLeftCorner(3, 3) = coor_B_to_coor_O.topLeftCorner(3, 3).inverse();
     coor_O_to_coor_B.topRightCorner(3, 1) =  -1 * coor_B_to_coor_O.topLeftCorner(3, 3).inverse() *
                                                  coor_B_to_coor_O.topRightCorner(3, 1);   
 
-    Eigen::Vector4d A_in_coor_O(1, 3, 0, 1);  // 机器人A在坐标系O中的坐标： -M_PI / 2
-    Eigen::Vector4d A_end_in_coor_O(1, 2, 0, 1);  // 机器人A在坐标系O中的坐标：
+    Eigen::Vector4d A_in_coor_O(1, 3, -M_PI / 2, 1);  // 机器人A在坐标系O中的齐次坐标
    
     Eigen::Vector4d A_in_coor_B;  // 求机器人A在机器人B中的坐标：
-    Eigen::Vector4d A_end_in_coor_B;  // 求机器人A在机器人B中的end坐标：
     // TODO
-    A_in_coor_B = coor_O_to_coor_B * A_in_coor_O;
-    A_end_in_coor_B = coor_O_to_coor_B * A_end_in_coor_O;
-    Eigen::Matrix3d coor_A_to_coor_O;
+    A_in_coor_B = coor_O_to_coor_B * A_in_coor_O;  // 利用坐标旋转关系求解坐标点，更容易理解。
 
-    Eigen::Vector2f v1{ 1, 0};
-    Eigen::Vector2f v2{A_end_in_coor_B(0)-A_in_coor_B(0), A_end_in_coor_B(1)-A_in_coor_B(1)};
-
-    double dot = v1(0)*v2(0) + v1(1)*v2(1);      // dot product between [v1(0), v1(1)] and [v2(0), v2(y)]
-    double det = v1(0)*v2(1) - v1(1)*v2(0);      // determinant
-    double angle = atan2(det, dot);  // atan2(y, x) or atan2(sin, cos)    // end your code here
+    double angle =  A_in_coor_O(2) - B_in_coor_O(2);  // A相对B的变化： angleA - angleB
 
     cout << "The right answer is BA: 2 1 1.5708" << endl;
-    cout << "Your answer is BA: " << v1.transpose() << endl;
-    cout << "Your answer is BA: " << v2.transpose() << endl;
-    cout << "Your answer is BA angle: " <<angle << endl;
+    cout << "Your answer is BA: " << A_in_coor_B(0) << " " << A_in_coor_B(1) << " " << angle<< endl;
 }
 
+// 参考答案， 感觉不太好理解，实际验证的角度结果与test1相反
+// 查询发现 slam中默认顺时针为正？ 课程讲的真的糊
 void test2() {
  // 机器人B在坐标系O中的坐标：
-    Eigen::Vector3d B(3, 4, M_PI);
+    Eigen::Vector3d B(3, 4, M_PI/2);
 
     // 坐标系B到坐标O的转换矩阵：
     Eigen::Matrix3d TOB;
@@ -78,14 +74,12 @@ void test2() {
 
     cout << "The right answer is BA: 2 1 1.5708" << endl;
     cout << "Your answer is BA: " << BA.transpose() << endl;
-
-
 }
 
 
 int main(int argc, char** argv) {
   test1();
-  // test2();
+  test2();
   return 0;
 }
 

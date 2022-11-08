@@ -3,6 +3,8 @@
 [code of autolabor ROS理论与实践](http://www.autolabor.com.cn/book/ROSTutorials/index.html)  
 [homework of 深蓝学院 激光SLAM理论与实践](https://www.shenlanxueyuan.com/course/522)  
 
+### 环境
+Ubuntu18.04 + ROS melodic
 
 ### 内容
 - [x] 三种通讯方式 
