@@ -6,9 +6,9 @@
 
 typedef struct edge
 {
-  int xi,xj;
-  Eigen::Vector3d measurement;
-  Eigen::Matrix3d infoMatrix;
+  int xi,xj;  // 两个顶点？
+  Eigen::Vector3d measurement;  // 观测值， 里程计？
+  Eigen::Matrix3d infoMatrix;  // 信息矩阵
 }Edge;
 
 

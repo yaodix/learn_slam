@@ -41,6 +41,7 @@ class LidarMotionCalibrator {
 
         //得到最终点的时间
         int beamNum = laserScanMsg.ranges.size();
+        // time_increment：雷达每个数据点的时间间隔
         endTime = startTime + ros::Duration(laserScanMsg.time_increment * (beamNum - 1));
 
         // 将数据复制出来
@@ -225,7 +226,9 @@ class LidarMotionCalibrator {
             float lidar_angle = atan2(tmp_y, tmp_x);
 
             std::cout << i << "  " << tmp_x << " " << tmp_y << std::endl;
-            if (i == 0) lidar_dist = 0.;
+            if (i == 0) {
+              lidar_dist = 0.;
+            } 
             ranges[startIndex + i] = lidar_dist;     
             angles[startIndex + i] = lidar_angle;
           } 

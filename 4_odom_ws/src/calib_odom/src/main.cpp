@@ -40,6 +40,12 @@ using namespace std;
 using namespace boost::asio;//定义一个命名空间，用于后面的读写操作
 //using namespace karto;
 
+
+/*
+几个问题：
+1. 标定的真值如何提供？
+*/
+
 //用来进行里程计矫正的类
 OdomCalib Odom_calib;
 
@@ -65,7 +71,7 @@ public:
     Eigen::Vector3d odom_pos_cal;
 
 
-    std::vector<Eigen::Vector3d> odom_increments;          //用来储存两帧之间的里程计的增量
+    std::vector<Eigen::Vector3d> odom_increments;  //用来储存两帧之间的里程计的增量
 
     std::string odom_frame_;
     std::string base_frame_;
@@ -80,7 +86,7 @@ public:
     nav_msgs::Path path_odom,path_scan;
     ros::Time current_time;
 
-    //进行时间同步
+    // 进行时间同步
     message_filters::Subscriber<sensor_msgs::LaserScan>* scan_filter_sub_;
     tf::MessageFilter<sensor_msgs::LaserScan>* scan_filter_;
 
@@ -107,7 +113,6 @@ public:
 
 
 };
-
 
 Eigen::Vector3d now_pos,last_pos;
 
@@ -339,11 +344,10 @@ void Scan2::scanCallBack(const sensor_msgs::LaserScan::ConstPtr &_laserScanMsg)
 }
 
 //TODO:
-//求解得到两帧数据之间的位姿差
+//求解得到两帧数据之间的位姿差--航迹推算公式
 //即求解当前位姿　在　上一时刻　坐标系中的坐标
 Eigen::Vector3d  cal_delta_distence(Eigen::Vector3d odom_pose)
 {
-
     Eigen::Vector3d d_pos, d_pos2;  //return value
     now_pos = odom_pose;
 
@@ -514,17 +518,14 @@ Eigen::Vector3d  Scan2::PIICPBetweenTwoFrames(LDP& currentLDPScan,
 
 int main(int argc,char** argv)
 {
-
     ros::init(argc, argv, "message_filter_node");
     ros::Time::init();
     ros::NodeHandle n;
     Scan2 scan;
 
-
     Odom_calib.Set_data_len(1200000);
     Odom_calib.set_data_zero();
     ros::spin();
-
 
     return 0;
 }

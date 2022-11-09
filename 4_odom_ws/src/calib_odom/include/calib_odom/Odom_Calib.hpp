@@ -10,8 +10,8 @@ class OdomCalib
 
 public:
     OdomCalib(){
-        data_len = 0;
-        now_len = 0;
+        data_len_ = 0;
+        now_len_ = 0;
     }
 
    // virtual ~OdomCalib();
@@ -22,9 +22,9 @@ public:
     void set_data_zero();
 
 private:
-    Eigen::MatrixXd  A;
-    Eigen::VectorXd  b;
-    int data_len,now_len;
+    Eigen::MatrixXd  A_;
+    Eigen::VectorXd  b_;
+    int data_len_,now_len_;
 
 };
 

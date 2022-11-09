@@ -1,3 +1,5 @@
+// 参考文章： https://blog.csdn.net/shuang_yu_/article/details/88978235
+
 #include "imls_icp.h"
 #include <csm/csm_all.h>
 #include "ros/ros.h"
@@ -41,7 +43,8 @@ public:
         //按顺序读取bag内激光的消息和里程计的消息
         BOOST_FOREACH(rosbag::MessageInstance const m, view)
         {
-            champion_nav_msgs::ChampionNavLaserScanConstPtr scan = m.instantiate<champion_nav_msgs::ChampionNavLaserScan>();
+            champion_nav_msgs::ChampionNavLaserScanConstPtr scan =
+                    m.instantiate<champion_nav_msgs::ChampionNavLaserScan>();
             if(scan != NULL)
                 championLaserScanCallback(scan);
 

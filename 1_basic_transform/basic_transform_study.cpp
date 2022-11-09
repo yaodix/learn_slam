@@ -9,7 +9,7 @@ using namespace std;
 
 // 右手坐标系，四指方向(逆时针)为正旋转方向
 void test1() {
-    Eigen::Vector3d B_in_coor_O(3, 4, M_PI/2);  // 机器人B在坐标系O中的坐标：
+    Eigen::Vector3d B_in_coor_O(3, 4, M_PI);  // 机器人B在坐标系O中的坐标：
 
     // 坐标系B到坐标O的转换矩阵：
     Eigen::Matrix4d coor_B_to_coor_O;
@@ -41,7 +41,7 @@ void test1() {
 // 查询发现 slam中默认顺时针为正？ 课程讲的真的糊
 void test2() {
  // 机器人B在坐标系O中的坐标：
-    Eigen::Vector3d B(3, 4, M_PI/2);
+    Eigen::Vector3d B(3, 4, M_PI);
 
     // 坐标系B到坐标O的转换矩阵：
     Eigen::Matrix3d TOB;
@@ -68,12 +68,20 @@ void test2() {
     BA[0] = TBA(0, 2);
     BA[1] = TBA(1, 2);
     BA[2] = std::atan2(TBA(0, 1), TBA(0, 0));
-
-
     // end your code here
+
+   // 轨迹推算方式求解
+     Eigen::Matrix3d R;
+    R << cos(B(2)), -sin(B(2)), 0,
+         sin(B(2)),  cos(B(2)), 0,
+         0      , 0           , 1;
+    //  解算
+    Eigen::Vector3d d_pos = R.inverse() * (A - B);
+
 
     cout << "The right answer is BA: 2 1 1.5708" << endl;
     cout << "Your answer is BA: " << BA.transpose() << endl;
+    cout << "Your answer is d_pos: " << d_pos.transpose() << endl;
 }
 
 
