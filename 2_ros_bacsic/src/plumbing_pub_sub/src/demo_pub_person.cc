@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   p.age = 22;
   p.height = 180;
   p.name = "zhangsan";
-  while (ros::ok()) {  // ok表示
+  while (ros::ok()) {  // ok表示节点不死
     p.age += 1;
     pub.publish(p);
     std::stringstream ss;

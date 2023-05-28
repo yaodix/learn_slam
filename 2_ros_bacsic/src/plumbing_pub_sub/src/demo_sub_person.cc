@@ -19,9 +19,9 @@ int main(int argc, char* argv[]) {
   // 2.创建节点句柄
   ros::NodeHandle nh;
   // 3.创建订阅者对象。fang是话题名称，可以通过rostopic echo fang来常看
-  ros::Subscriber pub = nh.subscribe("liaotian", 10, dogMsg);  // 订阅话题名称需一致
+  ros::Subscriber sub = nh.subscribe("liaotian", 10, dogMsg);  // 订阅话题名称需一致
   // 4.处理订阅数据
-  ros::spin();  // 有回调函数使用，设置循环调用回调函数
+  ros::spin();  // 有回调函数使用，设置循环调用回调函数,ros::spin() 后的语句不会执行到
   return 0;
 }
 
